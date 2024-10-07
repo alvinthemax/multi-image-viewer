@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Multi-Format Archive Image Viewer</title>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jszip/3.7.1/jszip.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/unrar.js@0.4.1/unrar.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/7z-wasm@0.10.1/7z-wasm.js"></script>
+</head>
+<body>
+    <h1>Upload a Zip, Rar, or 7z File to View Images</h1>
+    <input type="file" id="fileInput" />
+    <div id="imageContainer"></div>
+
+    <script>
+        document.getElementById('fileInput').addEventListener('change', function(event) {
+            const file = event.target.files[0];
+            if (!file) return;
+
+            const fileName = file.name.toLowerCase();
+
+            if (fileName.endsWith('.zip')) {
+                handleZipFile(file);
+            } else if (fileName.endsWith('.rar')) {
+                handleRarFile(file);
+            } else if (fileName.endsWith('.7z')) {
+                handle7zFile(file);
+            } else {
+                alert('Unsupported file type. Please upload a .zip, .rar, or .7z file.');
+            }
+        });
+
+        function handleZipFile(file) {
+            const reader = new FileReader();
+            reader.onload = function(e) {
+                JSZip.loadAsync(e.target.result).then(function(zip) {
+                    Object.keys(zip.files).forEach(function(filename) {
+                        if (filename.endsWith('.jpg') || filename.endsWith('.png')) {
+                            zip.files[filename].async('blob').then(function(blob) {
+                                displayImage(blob);
+                            });
+                        }
+                    });
+                });
+            };
+            reader.readAsArrayBuffer(file);
+        }
+
+        function handleRarFile(file) {
+            const reader = new FileReader();
+            reader.onload = function(e) {
+                const unrar = new Unrar();
+                unrar.open(e.target.result).then((archive) => {
+                    archive.files.forEach((file) => {
+                        if (file.name.endsWith('.jpg') || file.name.endsWith('.png')) {
+                            file.read().then((content) => {
+                                const blob = new Blob([content], { type: 'image/jpeg' });
+                                displayImage(blob);
+                            });
+                        }
+                    });
+                });
+            };
+            reader.readAsArrayBuffer(file);
+        }
+
+        function handle7zFile(file) {
+            const reader = new FileReader();
+            reader.onload = async function(e) {
+                const archive = await SevenZip.extract(e.target.result);
+                archive.files.forEach((file) => {
+                    if (file.name.endsWith('.jpg') || file.name.endsWith('.png')) {
+                        const blob = new Blob([file.buffer], { type: 'image/jpeg' });
+                        displayImage(blob);
+                    }
+                });
+            };
+            reader.readAsArrayBuffer(file);
+        }
+
+        function displayImage(blob) {
+            const img = document.createElement('img');
+            img.src = URL.createObjectURL(blob);
+            img.style.maxWidth = '200px'; // Adjust size as needed
+            document.getElementById('imageContainer').appendChild(img);
+        }
+    </script>
+</body>
+</html>
