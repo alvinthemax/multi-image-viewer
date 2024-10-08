@@ -7,6 +7,8 @@
 
 **How to use:**
 1. open the [page](https://alvinthemax.github.io/multi-image-viewer)
-2. compress your images or directory containing images into a file *(only support .zip/.7z/.rar)
-3. select your compressed file
-4. lets see if it work
+2. select directory or supported files
+3. lets see if it work 😎
+
+Buy me a cofee:
+`0x76777473e4c82Ed9e6B67188422674896fcf3e3D`
