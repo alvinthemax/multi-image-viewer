@@ -34,19 +34,9 @@
             text-align: center;
         }
 
-        #fileInput {
-            padding: 10px 20px;
-            font-size: 1em;
-            background-color: #0066cc;
-            color: white;
-            border: none;
-            border-radius: 5px;
-            cursor: pointer;
-            margin-bottom: 10px;
-        }
-
-        #fileInput:hover {
-            background-color: #005bb5;
+        #fileInput,
+        #fileInputIndividual {
+            display: none; /* Hide the inputs */
         }
 
         #resetBtn {
@@ -62,6 +52,33 @@
 
         #resetBtn:hover {
             background-color: #c0392b;
+        }
+
+        #toggleContainer {
+            display: flex;
+            align-items: center;
+            margin-bottom: 10px;
+        }
+
+        #toggleButton {
+            padding: 10px 20px;
+            font-size: 1em;
+            background-color: #0066cc;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+
+        #toggleButton:hover {
+            background-color: #005bb5;
+        }
+
+        #toggleIcon {
+            width: 20px;
+            height: 20px;
+            margin-left: 10px; /* Spacing between button and icon */
+            cursor: pointer;
         }
 
         #imageContainer {
@@ -84,9 +101,9 @@
             transform: scale(1.05);
         }
 
-        /* Modal styling */
+        /* Modal styles... (keep the existing modal styles) */
         #imageModal {
-            display: none;
+            display: none; /* Initially hidden */
             position: fixed;
             top: 0;
             left: 0;
@@ -102,124 +119,103 @@
             position: relative;
             max-width: 90%;
             max-height: 90%;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
         }
 
         #modalImage {
             max-width: 100%;
-            max-height: 100%;
-            display: block;
-            position: relative;
-            z-index: 1;
+            max-height: 80vh; /* Limit height of modal image */
+            border-radius: 5px;
         }
 
+        #closeModal,
         .modalNav {
             position: absolute;
-            top: 50%;
-            transform: translateY(-50%);
-            background-color: rgba(0, 0, 0, 0.5);
-            color: white;
-            font-size: 1.5em;
-            width: 40px;
-            height: 40px;
+            background: none;
             border: none;
-            border-radius: 50%;
+            color: white;
+            font-size: 2em;
             cursor: pointer;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            transition: background-color 0.3s ease;
-            z-index: 2;
         }
 
-        .modalNav:hover {
-            background-color: rgba(0, 0, 0, 0.8);
+        #closeModal {
+            right: 10px;
+            top: 10px;
         }
 
         #prevBtn {
             left: 10px;
+            top: 50%;
+            transform: translateY(-50%);
         }
 
         #nextBtn {
             right: 10px;
+            top: 50%;
+            transform: translateY(-50%);
         }
 
-        #closeModal {
-            position: absolute;
-            top: 10px;
-            right: 10px;
-            background-color: rgba(0, 0, 0, 0.5);
-            color: white;
-            font-size: 1.5em;
-            width: 40px;
-            height: 40px;
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            border: none;
-            cursor: pointer;
-            z-index: 2;
-        }
-
-        #closeModal:hover {
-            background-color: rgba(0, 0, 0, 0.8);
-        }
-
-        /* Zoom controls */
         #zoomControls {
+            position: absolute;
+            bottom: 10px;
+            left: 50%;
+            transform: translateX(-50%);
             display: flex;
-            justify-content: center;
-            margin-top: 10px;
-            z-index: 2;
+            gap: 10px;
         }
 
-        #zoomIn,
-        #zoomOut,
-        #resetZoom {
-            background-color: rgba(0, 0, 0, 0.5);
+        #zoomControls button {
+            background-color: #333;
             color: white;
-            font-size: 1.5em;
-            width: 40px;
-            height: 40px;
-            border-radius: 50%;
             border: none;
+            border-radius: 5px;
+            padding: 5px 10px;
             cursor: pointer;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            transition: background-color 0.3s ease;
-            margin: 0 5px;
         }
 
-        #zoomIn:hover,
-        #zoomOut:hover,
-        #resetZoom:hover {
-            background-color: rgba(0, 0, 0, 0.8);
+        #zoomControls button:hover {
+            background-color: #555;
         }
 
-        /* List styling */
+        /* Remove default bullet points from list */
         ul {
             list-style-type: none;
-            padding: 0;
-            margin: 0;
+            padding: 0; /* Remove padding from list */
         }
 
+        /* Align img with text in li */
         li {
             display: flex;
-            align-items: center;
-            margin-bottom: 5px;
+            align-items: center; /* Center align items */
+            margin-bottom: 10px; /* Add space between list items */
         }
 
         li img {
-            width: 15px; /* Set the width for the icon */
-            height: 15px; /* Set the height for the icon */
-            margin-right: 5px; /* Space between icon and text */
-            position: relative; /* For positioning the tooltip */
-            cursor: pointer; /* Pointer cursor on hover */
+            margin-right: 10px; /* Add space between image and text */
+            width: 20px; /* Set a specific width for the icons */
+            height: 20px; /* Set a specific height for the icons */
         }
+        #loadingContainer {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-top: 20px;
+}
+
+#spinner {
+    margin-bottom: 10px;
+    animation: spin 2s linear infinite;
+}
+
+@keyframes spin {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
+}
+
+#progressText {
+    font-size: 1.2em;
+    color: #333;
+}
+
     </style>
 </head>
 
@@ -242,11 +238,21 @@
         </li>
     </ul>
 
+    <div id="toggleContainer">
+        <button id="toggleButton" onclick="triggerSelection()">
+            Upload via Directory
+        </button>
+        <img id="toggleIcon" src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQ97r7xIZhVrFoaNsJsx4k8isibtBg2d94FYg&s" alt="Toggle icon" onclick="toggleUpload()" />
+    </div>
+    
     <input type="file" id="fileInput" webkitdirectory />
+    <input type="file" id="fileInputIndividual" multiple>
+    
+
     <button id="resetBtn">Reset</button>
+
     <div id="imageContainer"></div>
 
-    <!-- Modal -->
     <div id="imageModal">
         <div id="modalContent">
             <img id="modalImage" src="" alt="Modal Image" />
@@ -260,17 +266,35 @@
             </div>
         </div>
     </div>
+    <div id="loadingContainer" style="display:none;">
+        <div id="spinner" style="font-size: 2em;">🔄</div>
+        <div id="progressText">Loading... 0%</div>
+    </div>
+    
 
     <script>
+        let usingDirectoryUpload = true; // Track which upload method is currently active
+        let imageList = [];
         let currentIndex = 0;
         let zoomLevel = 1;
-        let imageList = [];
 
-        document.getElementById('fileInput').addEventListener('change', function (event) {
-            const files = event.target.files;
-            Array.from(files).forEach((file) => {
+        document.getElementById('fileInput').addEventListener('change', handleDirectoryUpload);
+        document.getElementById('fileInputIndividual').addEventListener('change', handleFileUpload);
+        document.getElementById('resetBtn').addEventListener('click', resetImages); // Add event listener to reset button
+
+        function handleDirectoryUpload(event) {
+            const files = Array.from(event.target.files);
+            processFiles(files);
+        }
+
+        function handleFileUpload(event) {
+            const files = Array.from(event.target.files);
+            processFiles(files);
+        }
+
+        function processFiles(files) {
+            files.forEach(file => {
                 const fileName = file.name.toLowerCase();
-
                 if (fileName.endsWith('.zip')) {
                     handleZipFile(file);
                 } else if (fileName.endsWith('.rar')) {
@@ -278,19 +302,95 @@
                 } else if (fileName.endsWith('.7z')) {
                     handle7zFile(file);
                 } else if (fileName.endsWith('.jpg') || fileName.endsWith('.jpeg') || fileName.endsWith('.png')) {
-                    displayImage(file);
+                    displayImage(URL.createObjectURL(file));
                 }
             });
-        });
+        }
+
+        function displayImage(src) {
+            const img = document.createElement('img');
+            img.src = src;
+            img.alt = 'Uploaded Image';
+            img.addEventListener('click', () => openModal(src));
+            document.getElementById('imageContainer').appendChild(img);
+            imageList.push(src);
+        }
+
+        function resetImages() {
+            imageList = []; // Clear the image list
+            currentIndex = 0; // Reset the current index
+            document.getElementById('imageContainer').innerHTML = ''; // Clear displayed images
+        }
+
+        function openModal(src) {
+            document.getElementById('imageModal').style.display = 'flex';
+            document.getElementById('modalImage').src = src;
+            currentIndex = imageList.indexOf(src);
+            zoomLevel = 1;
+            document.getElementById('modalImage').style.transform = 'scale(1)';
+            updateNavigationButtons();
+        }
+
+        function closeModal() {
+            document.getElementById('imageModal').style.display = 'none';
+        }
+
+        document.getElementById('closeModal').addEventListener('click', closeModal);
+        document.getElementById('prevBtn').addEventListener('click', showPrevImage);
+        document.getElementById('nextBtn').addEventListener('click', showNextImage);
+        document.getElementById('zoomIn').addEventListener('click', zoomIn);
+        document.getElementById('zoomOut').addEventListener('click', zoomOut);
+        document.getElementById('resetZoom').addEventListener('click', resetZoom);
+
+        function showPrevImage() {
+            currentIndex = (currentIndex - 1 + imageList.length) % imageList.length;
+            updateModalImage();
+        }
+
+        function showNextImage() {
+            currentIndex = (currentIndex + 1) % imageList.length;
+            updateModalImage();
+        }
+
+        function updateModalImage() {
+            document.getElementById('modalImage').src = imageList[currentIndex];
+            zoomLevel = 1;
+            document.getElementById('modalImage').style.transform = 'scale(1)';
+            updateNavigationButtons();
+        }
+
+        function updateNavigationButtons() {
+            document.getElementById('prevBtn').style.display = imageList.length > 1 ? 'block' : 'none';
+            document.getElementById('nextBtn').style.display = imageList.length > 1 ? 'block' : 'none';
+        }
+
+        function zoomIn() {
+            zoomLevel *= 1.2;
+            updateZoom();
+        }
+
+        function zoomOut() {
+            zoomLevel /= 1.2;
+            updateZoom();
+        }
+
+        function resetZoom() {
+            zoomLevel = 1;
+            updateZoom();
+        }
+
+        function updateZoom() {
+            document.getElementById('modalImage').style.transform = `scale(${zoomLevel})`;
+        }
 
         function handleZipFile(file) {
             const reader = new FileReader();
-            reader.onload = (event) => {
-                JSZip.loadAsync(event.target.result).then((zip) => {
-                    Object.keys(zip.files).forEach((fileName) => {
-                        if (fileName.endsWith('.jpg') || fileName.endsWith('.jpeg') || fileName.endsWith('.png')) {
-                            zip.files[fileName].async('blob').then(displayImage);
-                        }
+            reader.onload = function (e) {
+                JSZip.loadAsync(e.target.result).then(zip => {
+                    Object.keys(zip.files).forEach(filename => {
+                        zip.files[filename].async('blob').then(function (blob) {
+                            displayImage(URL.createObjectURL(blob));
+                        });
                     });
                 });
             };
@@ -299,96 +399,107 @@
 
         function handleRarFile(file) {
             const reader = new FileReader();
-            reader.onload = (event) => {
-                const buffer = new Uint8Array(event.target.result);
-                const rar = unrarjs.Unrar.open(buffer);
-                const files = rar.getFileList();
-                files.forEach((file) => {
+            reader.onload = function (e) {
+                const data = e.target.result;
+                const rar = unrar.Unrar.open(new Uint8Array(data));
+                rar.extractAll().then(files => {
+                    files.forEach(file => {
+                        if (file.fileHeader.type === 'file' && (file.fileHeader.name.endsWith('.jpg') || file.fileHeader.name.endsWith('.jpeg') || file.fileHeader.name.endsWith('.png'))) {
+                            displayImage(URL.createObjectURL(new Blob([file.data])));
+                        }
+                    });
+                });
+            };
+            reader.readAsArrayBuffer(file);
+        }
+
+        function handle7zFile(file) {
+            const reader = new FileReader();
+            reader.onload = async function (e) {
+                const data = e.target.result;
+                const result = await SevenZip.extract(data);
+                result.forEach(file => {
                     if (file.name.endsWith('.jpg') || file.name.endsWith('.jpeg') || file.name.endsWith('.png')) {
-                        const imgBlob = rar.readFile(file.name);
-                        displayImage(new Blob([imgBlob], { type: file.mime }));
+                        displayImage(URL.createObjectURL(new Blob([file.data])));
                     }
                 });
-                rar.close();
             };
             reader.readAsArrayBuffer(file);
         }
 
-        async function handle7zFile(file) {
-            const reader = new FileReader();
-            reader.onload = async (event) => {
-                const buffer = new Uint8Array(event.target.result);
-                const sevenZip = await SevenZip.load();
-                const archive = await sevenZip.open(buffer);
-                for (const file of archive.getEntries()) {
-                    if (file.isDirectory) continue;
-                    if (file.name.endsWith('.jpg') || file.name.endsWith('.jpeg') || file.name.endsWith('.png')) {
-                        const imgBlob = await file.getData();
-                        displayImage(new Blob([imgBlob], { type: file.mime }));
-                    }
-                }
-                await archive.close();
-            };
-            reader.readAsArrayBuffer(file);
+        function toggleUpload() {
+            const toggleButton = document.getElementById('toggleButton');
+            usingDirectoryUpload = !usingDirectoryUpload;
+            toggleButton.textContent = usingDirectoryUpload ? 'Upload via Directory' : 'Upload via Files';
         }
 
-        function displayImage(file) {
-            const img = document.createElement('img');
-            img.src = URL.createObjectURL(file);
-            img.alt = file.name;
-            img.addEventListener('click', () => openModal(img.src));
-            document.getElementById('imageContainer').appendChild(img);
-            imageList.push(img.src);
+        function triggerSelection() {
+            const fileInput = usingDirectoryUpload ? document.getElementById('fileInput') : document.getElementById('fileInputIndividual');
+            fileInput.click();
         }
 
-        function openModal(src) {
-            document.getElementById('imageModal').style.display = 'flex';
-            document.getElementById('modalImage').src = src;
-            currentIndex = imageList.indexOf(src);
-            zoomLevel = 1; // Reset zoom on opening modal
-            updateImageTransform();
+        function processFiles(files) {
+    // Tampilkan spinner dan progres
+    document.getElementById('loadingContainer').style.display = 'flex';
+    let totalFiles = files.length;
+    let processedFiles = 0;
+
+    files.forEach((file, index) => {
+        const fileName = file.name.toLowerCase();
+        if (fileName.endsWith('.zip')) {
+            handleZipFile(file);
+        } else if (fileName.endsWith('.rar')) {
+            handleRarFile(file);
+        } else if (fileName.endsWith('.7z')) {
+            handle7zFile(file);
+        } else if (fileName.endsWith('.jpg') || fileName.endsWith('.jpeg') || fileName.endsWith('.png')) {
+            displayImage(URL.createObjectURL(file));
         }
 
-        function closeModal() {
-            document.getElementById('imageModal').style.display = 'none';
-        }
+        processedFiles++;
+        updateProgress(processedFiles, totalFiles); // Update progress
+    });
+}
 
-        function updateImageTransform() {
-            const modalImage = document.getElementById('modalImage');
-            modalImage.style.transform = `scale(${zoomLevel})`;
-        }
+function updateProgress(processed, total) {
+    let percent = Math.floor((processed / total) * 100);
+    document.getElementById('progressText').textContent = `Loading... ${percent}%`;
 
-        document.getElementById('closeModal').addEventListener('click', closeModal);
+    // Sembunyikan spinner setelah selesai
+    if (processed === total) {
+        setTimeout(() => {
+            document.getElementById('loadingContainer').style.display = 'none';
+        }, 500);
+    }
+}
+function handleDirectoryUpload(event) {
+    const files = Array.from(event.target.files);
+    if (files.length === 0) {
+        hideProgress(); // Sembunyikan jika tidak ada file yang dipilih
+        return;
+    }
+    processFiles(files);
+}
 
-        document.getElementById('prevBtn').addEventListener('click', () => {
-            currentIndex = (currentIndex > 0) ? currentIndex - 1 : imageList.length - 1;
-            document.getElementById('modalImage').src = imageList[currentIndex];
-        });
+function handleFileUpload(event) {
+    const files = Array.from(event.target.files);
+    if (files.length === 0) {
+        hideProgress(); // Sembunyikan jika tidak ada file yang dipilih
+        return;
+    }
+    processFiles(files);
+}
+function hideProgress() {
+    document.getElementById('loadingContainer').style.display = 'none';
+    document.getElementById('progressText').textContent = 'Loading... 0%'; // Reset progres ke 0%
+}
+function resetImages() {
+    imageList = []; // Clear the image list
+    currentIndex = 0; // Reset the current index
+    document.getElementById('imageContainer').innerHTML = ''; // Clear displayed images
+    hideProgress(); // Sembunyikan spinner dan progres
+}
 
-        document.getElementById('nextBtn').addEventListener('click', () => {
-            currentIndex = (currentIndex < imageList.length - 1) ? currentIndex + 1 : 0;
-            document.getElementById('modalImage').src = imageList[currentIndex];
-        });
-
-        document.getElementById('zoomIn').addEventListener('click', () => {
-            zoomLevel += 0.1;
-            updateImageTransform();
-        });
-
-        document.getElementById('zoomOut').addEventListener('click', () => {
-            zoomLevel = Math.max(1, zoomLevel - 0.1);
-            updateImageTransform();
-        });
-
-        document.getElementById('resetZoom').addEventListener('click', () => {
-            zoomLevel = 1;
-            updateImageTransform();
-        });
-
-        document.getElementById('resetBtn').addEventListener('click', () => {
-            document.getElementById('imageContainer').innerHTML = '';
-            imageList = [];
-        });
     </script>
 </body>
 
